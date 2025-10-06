@@ -1,7 +1,4 @@
----
-title: Adding player controls
-slug: adding-controls
----
+# Adding player controls
 
 So far the bunny drops to the ground quickly and there is nothing the player can
 do about it, this would make for a pretty poor game experience. In this section
@@ -16,6 +13,8 @@ connection between the SpriteKit Scene object and the code.
 If you recall, you changed the name of the bunny sprite to `hero` in `Hero.sks`,
 this gives you a way to easily find this node in the _GameScene_ scene graph.
 
+(This is a lot like assigning an ID to element in a webpage and accessing the element with JS.)
+
 Next you will add a code connection to the `hero` in your `GameScene` Class.
 
 > [action] Still in `GameScene.swift` setup the code connection.  
@@ -26,17 +25,17 @@ import SpriteKit
 import GameplayKit
 >
 class GameScene: SKScene {
->
+
     var hero: SKSpriteNode!
->
+
     override func didMove(to view: SKView) {
         /* Setup your scene here */
     }
->
+
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         /* Called when a touch begins */
     }
->
+
     override func update(_ currentTime: TimeInterval) {
         /* Called before each frame is rendered */
     }
@@ -54,10 +53,10 @@ ears again! This also allows us to use other animations with it as well.
 ```
 override func didMove(to view: SKView) {
   /* Setup your scene here */
->
+
   /* Recursive node search for 'hero' (child of referenced node) */
   hero = (self.childNode(withName: "//hero") as! SKSpriteNode)
->
+
   /* allows the hero to animate when it's in the GameScene */
   hero.isPaused = false
 }
@@ -87,7 +86,7 @@ keep the bunny flying high.
 ```
 override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
   /* Called when a touch begins */
->
+
   /* Apply vertical impulse */
   hero.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 300))
 }
@@ -122,10 +121,10 @@ modifying it in the `update` method, which is called every frame.
 ```
 override func update(_ currentTime: CFTimeInterval) {
   /* Called before each frame is rendered */
->
+
   /* Grab current velocity */
   let velocityY = hero.physicsBody?.velocity.dy ?? 0
->
+
   /* Check and cap vertical velocity */
   if velocityY > 400 {
     hero.physicsBody?.velocity.dy = 400
@@ -148,7 +147,7 @@ bunny should never move horizontally.
 Test your app now. The bunny should have a nice bump up each time you touch the
 screen. Good work!
 
-![Bunny Test gif](../Tutorial-Images/p04-bunny-physics-test.gif)
+![Bunny Test gif](p04-bunny-physics-test.gif)
 
 # Make the bunny rotate
 
@@ -178,7 +177,6 @@ var sinceTouch : CFTimeInterval = 0
 ```
 /* Apply subtle rotation */
 hero.physicsBody?.applyAngularImpulse(1)
->
 /* Reset touch timer */
 sinceTouch = 0
 ```
@@ -198,11 +196,13 @@ if no touch has occurred in a while. You perform both in the update method.
 <!--  -->
 
 > [action]
-> [download cgfloat+extensions.swift](https://github.com/MakeSchool-Tutorials/Hoppy-Bunny-SpriteKit-Swift3-V2/raw/master/CGFloat+Extensions.swift)
+> [download cgfloat+extensions.swift](https://github.com/Tech-at-DU/Hoppy-Bunny-SpriteKit-Swift3-V2/blob/master/CGFloat%2BExtensions.swift)
 > and drag this file into your project. Ensure _Copy items if needed_ is
 > checked.
+> 
+> Choose: File > New File From Template...
 >
-> ![Add file](../Tutorial-Images/xcode_add_file.png)
+> ![Add file](xcode_add_file.png)
 >
 > Feel free to explore this new code to see how it works.
 
@@ -213,18 +213,24 @@ bunny, limit the angular velocity and increment the new `sinceTouch` timer.
 > In `GameScene.swift`, add this code at end of the `update(...)` method:
 >
 ```
-/* Apply falling rotation */
-if sinceTouch > 0.2 {
-    let impulse = -20000 * fixedDelta
-    hero.physicsBody?.applyAngularImpulse(CGFloat(impulse))
+override func update(_ currentTime: TimeInterval) {
+    guard let heroBody = hero.physicsBody else { return }
+
+    // Clamp upward velocity
+    if heroBody.velocity.dy > 400 {
+        heroBody.velocity.dy = 400
+    }
+
+    // Update time since last touch
+    sinceTouch += fixedDelta
+
+    // Rotate based on vertical speed
+    let velocityY = heroBody.velocity.dy
+    let tilt = velocityY / 1000.0  // scale factor for sensitivity
+    let clampedTilt = max(min(tilt, 0.5), -1.0)  // about -57° to 30°
+
+    hero.zRotation = CGFloat(clampedTilt)
 }
->
-/* Clamp rotation */
-hero.zRotation.clamp(v1: CGFloat(-90).degreesToRadians(), CGFloat(30).degreesToRadians())
-hero.physicsBody?.angularVelocity.clamp(v1: -1, 3)
->
-/* Update last touch timer */
-sinceTouch += fixedDelta
 ```
 
 First thing you will notice are the red errors, you need to define the value for
@@ -264,7 +270,7 @@ There are a couple things going on here:
 
 Now run your game again. The behavior should hopefully be similar to this:
 
-![Bunny rotating](../Tutorial-Images/simulator_bunnyRotation.gif)
+![Bunny rotating](simulator_bunnyRotation.gif)
 
 # Summary
 
