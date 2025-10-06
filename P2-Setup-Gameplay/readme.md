@@ -16,7 +16,7 @@ powerful Xcode tool that lets you rapidly layout the scene.
 >
 > Choose Size: iPhone 6s and Portrait
 >
-> ![Adjusting GameScene size](../Tutorial-Images/xcode_gamescene_size.png)
+> ![Adjusting GameScene size](xcode_gamescene_size.png)
 
 Thankfully SpriteKit has your back and can automatically scale the view to fit
 other devices. This size will scale to fit iPhone 4, 5, 6, and 7.
@@ -40,7 +40,7 @@ point of the scene to the lower left.
 
 > [action] Set Anchor Point of both x and y to 0.
 >
-> ![Adding background image](../Tutorial-Images/Xcode-set-anchor-point.png)
+> ![Adding background image](Xcode-set-anchor-point.png)
 
 ## Set the Background Color
 
@@ -52,21 +52,21 @@ Let's do it ourselves!
 > near the top of the property inspector. Set the color to a nice sky blue. You
 > can use your own color or use (red: 72, green: 192, blue: 203).
 >
-> ![Adding background image](../Tutorial-Images/Xcode-Background-color.png)
+> ![Adding background image](Xcode-Background-color.png)
 
 ## Add the ground image
 
-> [action] Open the media library View > Show Library, or Command + Shift + L. ![library image](../Tutorial-Images/library_button.png) Scroll through
+> [action] Open the media library View > Show Library, or Command + Shift + L. ![library image](library_button.png) Scroll through
 > the media library and drag _ground.png_ into the scene.
 >
-> ![Adding the ground image](../Tutorial-Images/Xcode_add_ground.png)
+> ![Adding the ground image](Xcode_add_ground.png)
 >
 > Set the position to `(375,32)` or anywhere you think looks good, it's your
 > game after all.
 >
 > Note! The values above (375, 32) were chosen to fit the iPhone 6s screen size of 750 by 1334. 375 is half of 750. The value 32 might need adjustment, the art may also need to be scaled. Screens are larger now days from when the tutorial was originally written!
 >
-> ![Adding the ground image position](../Tutorial-Images/Xcode-ground-position.png)
+> ![Adding the ground image position](Xcode_add_ground.png)
 >
 > You'll notice the ground image extends beyond the screen border. Don't worry
 > about it, you will be scrolling the ground later to create that endless runner
@@ -79,7 +79,7 @@ Let's do it ourselves!
 >
 > Note! Again, the tutorial is being updated and screen sizes have changed. These numbers might need some adjustment, and the art may need to be scaled. 
 >
-> ![Adding the clouds](../Tutorial-Images/xcode-add-clouds.png)
+> ![Adding the clouds](xcode-add-clouds.png)
 
 # Creating the Bunny Scene
 
@@ -89,11 +89,11 @@ animate it.
 > [action] Create a new _SpriteKit Scene File_ by selecting
 > `File > New > File From Template...` then, choose `SpriteKit Scene`:
 >
-> ![Creating the Hero SpriteKit Scene file](../Tutorial-Images/xcode_add_sks.png)
+> ![Creating the Hero SpriteKit Scene file](xcode_add_sks.png)
 >
 > Because bunnies are heroes, save the file as `Hero`
 >
-> ![Saving the SpriteKit Scene file](../Tutorial-Images/xcode_add_sks_hero.png)
+> ![Saving the SpriteKit Scene file](xcode_add_sks_hero.png)
 
 ## Add the bunny
 
@@ -109,7 +109,7 @@ animate it.
 > Make sure you also set the _Position_ to `(0, 0)`, _Size_ to `(33, 33)`, and
 > set the _Anchor Point_ to `(0.5, 0.5)`
 >
-> ![Adding the bunny](../Tutorial-Images/xcode_add_hero.png)
+> ![Adding the bunny](xcode_add_sks_hero.png)
 
 <!--  -->
 
@@ -127,7 +127,7 @@ animation that is ~`0.5` seconds long and repeats forever.
 > ![Object Library](../Tutorial-Images/object-library.png) and look for the
 > _AnimateWithTextures Action_
 >
-> ![Adding the animation action](../Tutorial-Images/xcode-hero-add-action.png)
+> ![Adding the animation action](xcode-hero-add-action.png)
 >
 > and drag this into the start of the bunny _Timeline_ as shown:
 >
@@ -139,20 +139,18 @@ animation that is ~`0.5` seconds long and repeats forever.
 > the _Timeline_ then open the _Media library_ panel (use that `+` button!).
 > Drag `bunny1.png` and `bunny2.png` into the _Textures_ box as shown:
 >
-> ![Adding the animation frames](../Tutorial-Images/xcode_hero_add_action_frames.png)
+> ![Adding the animation frames](xcode_hero_add_action_frames.png)
 >
 > Before we try the animation, let's make it loop. Click on the _Circular arrow_
 > in the bottom left of your _AnimateWithTextures Action_ as shown and click the
 > `Infinity` symbol.
 >
-> ![Loop animation option](../Tutorial-Images/xcode_hero_action_loop.png)
->
-> ![Loop animation forever](../Tutorial-Images/xcode_hero_animation_action_loop.png)
+> ![Loop animation option](xcode_hero_action_loop.png)
 >
 > Finally time to see the bunny in action! Click _Animate_ in the _Timeline_ and
 > watch that bunny go.
 >
-> ![Preview the animation](../Tutorial-Images/xcode_animate_button.png)
+> ![Preview the animation](xcode_animate_button.gif)
 
 # Summary
 
