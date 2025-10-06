@@ -1,7 +1,4 @@
----
-title: Scrolling the world
-slug: scrolling-the-world
----
+# Scrolling the world
 
 Time for you to bring this world to life, you will be creating a conveyor belt
 system to scroll the world objects toward the player, giving illusion of the
@@ -33,7 +30,7 @@ virtual layer for all the objects you wish to scroll.
 > again and find it under the Objet library!), set the position to `(0,0)`, set
 > _Z-Position_ to `2` and set the _Name_ to `scrollLayer`:
 >
-> ![Add empty node](../Tutorial-Images/xcode_add_empty_node_scroll.png)
+> ![Add empty node](xcode_add_empty_node_scroll.png)
 
 Next you need to create a code connection for the _scrollLayer_
 
@@ -112,11 +109,11 @@ put some objects on it :]
 > The _ground_ node is now a child of the _scrollLayer_, and thus any scrolling
 > applied to the _scrollLayer_ will affect any child nodes.
 >
-> ![Modify sprite parent](../Tutorial-Images/xcode_ground_child.png)
+> ![Modify sprite parent](xcode_ground_child.png)
 
 Run the game. The ground should be scrolling, keep watching...
 
-![Ground scroll](../Tutorial-Images/bad_crystal.png)
+![Ground scroll](bad_crystal.gif)
 
 **For some reason the crystals get messed up in the gif**
 
@@ -136,7 +133,7 @@ The first step will be adding a second ground sprite to `GameScene.sks`
 > Duplicate the existing _ground_ by `Edit -> Copy` then
 > `Edit -> Paste`. This way all the properties of ground are already setup. You
 > should snap it to the end of the first ground piece. so that it looks like the
-> following image: ![ground snapped](../Tutorial-Images/ground_copy.png)
+> following image: ![ground snapped](ground_copy.png)
 
 Run the game.
 
@@ -155,16 +152,16 @@ if so you will then relocate it to back to the right edge.
 ```
 /* Loop through scroll layer nodes */
 for ground in scrollLayer.children as! [SKSpriteNode] {
->
+
   /* Get ground node position, convert node position to scene space */
   let groundPosition = scrollLayer.convert(ground.position, to: self)
->
+
   /* Check if ground sprite has left the scene */
   if groundPosition.x <= -ground.size.width / 2 {
->
+
       /* Reposition ground sprite to the second starting position */
       let newPosition = CGPoint(x: (self.size.width / 2) + ground.size.width, y: groundPosition.y)
->
+
       /* Convert new node position back to scroll layer space */
       ground.position = self.convert(newPosition, to: scrollLayer)
   }
