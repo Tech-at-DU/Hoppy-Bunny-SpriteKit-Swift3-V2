@@ -1,7 +1,4 @@
----
-title: Basic concepts of a side scroller
-slug: basic-concepts
----
+# Basic concepts of a side scroller
 
 If you have never built a side scroller before, this introduction will help you
 understand the basic concepts. You will be tackling this by constructing an
@@ -27,13 +24,16 @@ Time to make a SpriteKit project in Xcode and get started with Hoppy Bunny!
 >
 > ![Select New game project](../Tutorial-Images/xcode_new_project.png)
 >
-> On the next screen, Give your product a name (i.e. "hoppy-bunny"), and make
-> sure you select `Spritekit` as the Game Technology
+> On the next screen, Give your product a name (i.e. "hoppy-bunny"), choose language Swift, 
+> and make sure you select `Spritekit` as the Game Technology
 
 ## Adding artwork
 
 > [action] After the project is created, you should
-> [download our art pack for this game](https://github.com/MakeSchool-Tutorials/Hoppy-Bunny-SpriteKit-Swift3-V2/raw/master/assets.zip).
+> [download our art pack for this game](https://github.com/Tech-at-DU/Hoppy-Bunny-SpriteKit-Swift3-V2/blob/master/assets.zip).
+> 
+> All of the assets are in the assets folder of this GitHub repo.  
+>
 > Next you will add the art pack you just downloaded to your Xcode project by
 > first unpacking the archive. Select the `Assets.xcassets` folder in Xcode
 > project navigator, then drag the downloaded assets into Xcode as shown below:

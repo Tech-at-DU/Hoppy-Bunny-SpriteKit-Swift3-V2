@@ -1,7 +1,4 @@
----
-title: Set up the Game Scene
-slug: setup-gameplay
----
+# Set up the Game Scene
 
 Let's get started setting up the main game scene, SpritKit Scene Editor is a
 powerful Xcode tool that lets you rapidly layout the scene.
@@ -17,15 +14,9 @@ powerful Xcode tool that lets you rapidly layout the scene.
 > The default project may have a Label in the center with the Text "Hello
 > World". Click it to select it and press `delete` on the keyboard.
 >
-> Next modify the size parameters as shown in the _Attributes inspector panel_
-> set width to 320 and height to 568 `(width: 320, height: 568)`
+> Choose Size: iPhone 6s and Portrait
 >
 > ![Adjusting GameScene size](../Tutorial-Images/xcode_gamescene_size.png)
-
-Remember the device resolution guide in the previous chapter? You will be using
-a common design size of 320 x 568, this gives you a nice portrait view,
-perfectly suited to the artwork. You may be wondering what about supporting
-other devices?
 
 Thankfully SpriteKit has your back and can automatically scale the view to fit
 other devices. This size will scale to fit iPhone 4, 5, 6, and 7.
@@ -34,7 +25,7 @@ other devices. This size will scale to fit iPhone 4, 5, 6, and 7.
 > particular:
 >
 ```
-/* Set the scale mode to scale to fit the window */
+/* Find this line: */
 >
 scene.scaleMode = .aspectFill
 ```
@@ -65,14 +56,15 @@ Let's do it ourselves!
 
 ## Add the ground image
 
-> [action] Open the media library by clicking the small Plus button in the upper
-> right. ![library image](../Tutorial-Images/library_button.png) Scroll through
+> [action] Open the media library View > Show Library, or Command + Shift + L. ![library image](../Tutorial-Images/library_button.png) Scroll through
 > the media library and drag _ground.png_ into the scene.
 >
 > ![Adding the ground image](../Tutorial-Images/Xcode_add_ground.png)
 >
-> Set the position to `(160,32)` or anywhere you think looks good, it's your
+> Set the position to `(375,32)` or anywhere you think looks good, it's your
 > game after all.
+>
+> Note! The values above (375, 32) were chosen to fit the iPhone 6s screen size of 750 by 1334. 375 is half of 750. The value 32 might need adjustment, the art may also need to be scaled. Screens are larger now days from when the tutorial was originally written!
 >
 > ![Adding the ground image position](../Tutorial-Images/Xcode-ground-position.png)
 >
@@ -82,8 +74,10 @@ Let's do it ourselves!
 
 ## Add the clouds
 
-> [action] Drag in _clouds.png_ to the scene Set the _Position_ to `(160, 385)`
+> [action] Drag in _clouds.png_ to the scene Set the _Position_ to `(375, 1100)`
 > or any other value you think looks good.
+>
+> Note! Again, the tutorial is being updated and screen sizes have changed. These numbers might need some adjustment, and the art may need to be scaled. 
 >
 > ![Adding the clouds](../Tutorial-Images/xcode-add-clouds.png)
 
@@ -93,19 +87,19 @@ Now you're going to create a new _SpriteKit Scene File_ for the bunny and
 animate it.
 
 > [action] Create a new _SpriteKit Scene File_ by selecting
-> `File > New > File > SpriteKit Scene`:
+> `File > New > File From Template...` then, choose `SpriteKit Scene`:
 >
 > ![Creating the Hero SpriteKit Scene file](../Tutorial-Images/xcode_add_sks.png)
 >
-> Because bunnies are heroes, save the file as `Hero.sks`
+> Because bunnies are heroes, save the file as `Hero`
 >
-> ![Saving the SpriteKit Scene fike](../Tutorial-Images/xcode_add_sks_hero.png)
+> ![Saving the SpriteKit Scene file](../Tutorial-Images/xcode_add_sks_hero.png)
 
 ## Add the bunny
 
 > [action] Select `Hero.sks` in the _Project navigator_
 >
-> Drag `bunny1.png` into scene.
+> Open the library and drag `bunny1.png` into the Hero scene.
 >
 > You may not be able to see the bunny, if not `Zoom Out` the scene, center your
 > view on the bunny and then `Zoom In` a little.
@@ -118,11 +112,6 @@ animate it.
 > ![Adding the bunny](../Tutorial-Images/xcode_add_hero.png)
 
 <!--  -->
-
-> [info] Personally I dislike using the huge default scene size, when only
-> dealing with a single asset. It can also cause unexpected position issues
-> later on when using it as a referenced object. Why did we set the _Size_ to
-> `(33, 33)`? This is the _Size_ of the _bunny_ sprite!
 
 ## Animating the bunny
 
