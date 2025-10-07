@@ -1,7 +1,4 @@
----
-title: Implementing points
-slug: implementing-points
----
+# Implementing points
 
 There is one thing missing, the player's score! It's not much fun dodging
 obstacles without any reward.
@@ -16,7 +13,7 @@ obstacles without any reward.
 > `Helvetica Neue, Bold, 72`. Set the _Z Position_ to `10` as you want to ensure
 > it's always in the foreground.
 >
-> ![Add label](../Tutorial-Images/xcode_add_score_label.png)
+> ![Add label](xcode_add_score_label.png)
 >
 > Position it somewhere clear and easy to read, near top of the screen is good.
 
@@ -97,20 +94,20 @@ add 1 to `points` and ignore the rest of code that ends the game.
 /* Get references to bodies involved in collision */
 let contactA = contact.bodyA
 let contactB = contact.bodyB
->
+
 /* Get references to the physics body parent nodes */
 let nodeA = contactA.node!
 let nodeB = contactB.node!
->
+
 /* Did our hero pass through the 'goal'? */
 if nodeA.name == "goal" || nodeB.name == "goal" {
->
+
   /* Increment points */
   points += 1
->
+
   /* Update score label */
   scoreLabel.text = String(points)
->
+
   /* We can return now */
   return
 }
@@ -130,17 +127,6 @@ statement!
 
 Run the game. With a bit of skill you should be able to pass through the goal
 and get a point. You can always make the goal area bigger for testing :]
-
-# Feedback and Review - 2 minutes
-
-**We promise this won't take longer than 2 minutes!**
-
-Please take a moment to rate your understanding of the learning outcomes from
-this tutorial, and how we can improve it via our
-[tutorial feedback form](https://forms.gle/foNx7mRZhL92uRPN7)
-
-This allows us to get feedback on how well the students are grasping the
-learning outcomes, and tells us where we can improve the tutorial experience.
 
 # Summary
 

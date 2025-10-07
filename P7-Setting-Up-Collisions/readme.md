@@ -98,6 +98,7 @@ Let's give them each a unique binary value. They each need a value with a 1 in a
 different column from the others this identifies each as a different type (or
 category) of object.
 
+**Category**
 - `00000001` = 1 = Player
 - `00000010` = 2 = Obstacle
 - `00000100` = 4 = Ground
@@ -114,6 +115,7 @@ a physical collision. In your game you want the bunny/hero (1) to collide with
 the carrots/obstacle (2) and the ground (4). So the Collision Bit Mask for the
 player is 7.
 
+**Collision**
 - `00000001` = 1 = Player
 - `00000010` = 2 = Obstacle
 - `00000100` = 4 = Ground
