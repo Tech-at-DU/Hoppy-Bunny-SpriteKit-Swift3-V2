@@ -1,7 +1,4 @@
----
-title: Setting up collisions
-slug: setting-up-collisions
----
+# Setting up collisions
 
 You are going to set up collision handling so that your game finally becomes a
 real game! At the moment the player passes through obstacles and lands on the
@@ -179,7 +176,7 @@ step:
 >
 > - Set the _Category Mask_ to `8` and the _Contact Mask_ to `1`.
 >
-> ![Goal physics](../Tutorial-Images/xcode_spritekit_goal_physics_collision_properties.png)
+> ![Goal physics](xcode_spritekit_obstacle_physics_collision_properties.png)
 >
 > Goal objects are category 8, and contact Players (category 1).
 
@@ -187,10 +184,9 @@ step:
 
 > [action] Open `Hero.sks` and click on the **bunny**. The Body Type should be
 > `Bounding Circle`. Below this set _Category Mask_ to `1`, _Collision Mask_ to
-> `7` and the _Contact Mask_ to `15` (or `4294967295` this is 2^32 if you
-> prefer).
+> `7` and the _Contact Mask_ to `15`.
 >
-> ![Bunny physics](../Tutorial-Images/xcode_spritekit_bunny_physics_properties.png)
+> ![Bunny physics](xcode_spritekit_bunny_physics_properties.png)
 
 # Ground physics
 
@@ -206,7 +202,7 @@ to use. What value do you think you'll need for the _Contact Mask?_
 > Set _Category Mask_ to `4` and _Contact Mask_ to `1`, you want to be informed
 > if the bunny has hit the ground.
 >
-> ![Ground physics](../Tutorial-Images/xcode_spritekit_ground_physics_properties.png)
+> ![Ground physics](xcode_spritekit_ground_physics_properties.png)
 
 Run your game. The bunny will now collide with the obstacles yet thankfully be
 able to flap through the goal gap. Well if you're good enough :]
@@ -285,26 +281,26 @@ There is no pre-made button object in SpriteKit so you will need to get creative
 and create your own solution. To help we've provided a starting point for you
 with a custom class called _MSButtonNode_.
 
-> [action][download msbuttonnode.swift](https://github.com/MakeSchool-Tutorials/Hoppy-Bunny-SpriteKit-Swift3-V2/raw/master/MSButtonNode.swift)
+> [action][download msbuttonnode.swift](https://github.com/Tech-at-DU/Hoppy-Bunny-SpriteKit-Swift3-V2/blob/master/MSButtonNode.swift)
 > and drag this file into your project.
 
 <!-- -->
 
 > [action] Add the `restart_button.png` to your scene by opening the media
-> _Media Library_ (you know what to do: `+`) and dragging it into
+> _Media Library_ (command + shift + L) and dragging it into
 > `GameScene.sks`. Make sure you drag it within the boundaries of the scene.
 >
 > Set the _Name_ to `buttonRestart`, set the _Z Position_ to `10`, you want to
 > ensure this UI (User Interface) element sits on top of everything visually.
 >
-> ![Restart button properties](../Tutorial-Images/xcode_spritekit_restart_properties.png)
+> ![Restart button properties](xcode_spritekit_restart_properties.png)
 >
 > To turn this sprite into a custom button, you need to change the class to be
 > an instance of `MSButtonNode` instead of `SKSpriteNode`, you can use the
 > _Custom class_ panel to change this by setting the _Custom Class_ to
 > `MSButtonNode`
 >
-> ![Restart button custom class](../Tutorial-Images/xcode_spritekit_restart_custom_class.png)
+> ![Restart button custom class](xcode_spritekit_restart_custom_class.png)
 
 Can you setup a code connection for this button?
 
@@ -340,19 +336,14 @@ executed upon user touch.
 ```
 /* Setup restart button selection handler */
 buttonRestart.selectedHandler = {
->
   /* Grab reference to our SpriteKit view */
   let skView = self.view as SKView?
->
   /* Load Game scene */
   let scene = GameScene(fileNamed:"GameScene") as GameScene?
->
   /* Ensure correct aspect mode */
   scene?.scaleMode = .aspectFill
->
   /* Restart game scene */
   skView?.presentScene(scene)
->
 }
 ```
 
@@ -428,22 +419,16 @@ bunny (we're sad too)
 ```
 func didBegin(_ contact: SKPhysicsContact) {
   /* Hero touches anything, game over */
->
   /* Ensure only called while game running */
   if gameState != .active { return }
->
   /* Change game state to game over */
   gameState = .gameOver
->
   /* Stop any new angular velocity being applied */
   hero.physicsBody?.allowsRotation = false
->
   /* Reset angular velocity */
   hero.physicsBody?.angularVelocity = 0
->
   /* Stop hero flapping animation */
   hero.removeAllActions()
->
   /* Show restart button */
   buttonRestart.state = .MSButtonNodeStateActive
 }
@@ -505,11 +490,9 @@ you've already used actions to setup the the flappy animation frames.
 ```
 /* Create our hero death action */
 let heroDeath = SKAction.run({
->
     /* Put our hero face down in the dirt */
     self.hero.zRotation = CGFloat(-90).degreesToRadians()
 })
->
 /* Run action */
 hero.run(heroDeath)
 ```
@@ -529,28 +512,28 @@ this enables you to store multiple effects that can be reused on any node.
 
 > [action] Create a new _SpriteKit Action_ file called `GameEffects`:
 >
-> ![Create New Action file](../Tutorial-Images/xcode_create_skaction.png)
->
-> ![Add SpriteKit Action file GameEffects](../Tutorial-Images/xcode_create_skaction_file.png)
+> ![Create New Action file](xcode_create_skaction.png)
 >
 > Add your first _Action_, name it `Shake` >
-> ![Add New Action](../Tutorial-Images/xcode_spritekit_add_new_action.png)
+> ![Add New Action](xcode_spritekit_add_new_action.png)
 >
 > Now you have an empty action timeline ready for some actions, drag across the
 > _Move action_ from the _Object Library_.
 >
-> ![add move action](../Tutorial-Images/xcode_library_move.png) Set the
+> ![add move action](xcode_library_move.png) Set the
 > _Duration_ to `0.2` seconds. Copy and paste this action two times and then
 > modify all three actions as follows.
 >
 > - _Move Action 1:_ Set _Timing Function_ to `Ease In`, set _Offset_ to
->   `(8,2)` > ![move action 1](../Tutorial-Images/xcode_move_action_1.png)
+>   `(8,2)`
 >
 > - _Move Action 2:_ Set _Timing Function_ to `Ease Out`, set _Offset_ to
->   `(-4,-2)` > ![move action 2](../Tutorial-Images/xcode_move_action_2.png)
+>   `(-4,-2)` 
 >
 > - _Move Action 3:_ Set _Timing Function_ to `Ease Out`, set _Offset_ to
->   `(4,2)` > ![move action 3](../Tutorial-Images/xcode_move_action_3.png)
+>   `(4,2)` 
+
+![move action 3](xcode_move_action_3.png)
 
 ## Shake all the nodes
 
@@ -562,10 +545,9 @@ Time to apply this action to your scene.
 ```
 /* Load the shake action resource */
 let shakeScene:SKAction = SKAction.init(named: "Shake")!
->
+
 /* Loop through all nodes  */
 for node in self.children {
->
     /* Apply effect each ground node */
     node.run(shakeScene)
 }
@@ -595,7 +577,7 @@ doesn't feel quite right.
 > Set Initial Velocity to `(dx: 0, dy: 400)`. This should give the player a much
 > need reaction time cushion when the game first runs.
 >
-> ![Bunny Physics Tweaks](../Tutorial-Images/xcode_spritekit_bunny_physics_tweaks.png)
+> ![Bunny Physics Tweaks](xcode_spritekit_bunny_physics_tweaks.png)
 
 When the bunny is falling and the player touches the screen, the touch feels a
 little sluggish. This is due to the cumulative downward velocity generated by
