@@ -1,7 +1,4 @@
----
-title: Adding obstacles
-slug: adding-obstacles
----
+# Adding obstacles
 
 You are going to be creating obstacles for the player to navigate and
 implementing a mechanic to randomize their position to challenge the player.
@@ -12,11 +9,10 @@ implementing a mechanic to randomize their position to challenge the player.
 > Create a new _SpriteKit Scene File_ by selecting
 > `File > New > File > SpriteKit Scene`:
 >
-> ![Selecting the SKS File](../Tutorial-Images/xcode_add_sks.png)
+> ![Selecting the SKS File](xcode_add_sks.png)
 >
 > Save the file as `Obstacle.sks`
 >
-> ![Saving the SKS File](../Tutorial-Images/xcode_add_sks_obstacle.png)
 
 You will be constructing the obstacle with two carrots, one at the top and one
 at the bottom and a special invisible _Color Sprite_ between the carrots, which
@@ -25,7 +21,7 @@ you will later use to score the player.
 > [action]
 > Modify the size and anchor point of this new obstacle scene
 > properties as shown:
-> ![Modify the obstacle scene size](../Tutorial-Images/xcode_obstacle_scene_size.png)
+> ![Modify the obstacle scene size](xcode_obstacle_scene_size.png)
 >
 > Set the _Anchor Point_ to `(0.5, 0.5)` and _Size_ to `(51, 820)`.
 >
@@ -33,11 +29,14 @@ you will later use to score the player.
 > snap the carrots in place so that they are flush against the top and bottom
 > parts of the scene respectively.
 >
+> Resize the carrot top and bottom so thay fit within the scene dimensions. Thye should be about 51px wide. 
+> ![Carrots resized](xcode_obstacle_scene_size.png)
+>
 > Next add a _Color Sprite_ from the object library (That trusty `+` button
 > again!) and position it in between the carrot's as shown: Set the _Name_ to
 > `goal`
 >
-> ![Add the goal sprite](../Tutorial-Images/xcode_obstacle_goal_dims.png)
+> ![Add the goal sprite](xcode_obstacle_goal_dims.png)
 >
 > If you need to double check, look at the _Position_ and _Size_ of the _Color
 > Sprite_ in the screenshot to make sure you have the right dimensions.
@@ -48,7 +47,7 @@ you will later use to score the player.
 >
 > Your final obstacle should look something like this:
 >
-> ![Finished obstacle](../Tutorial-Images/xcode_obstacle_sks.png)
+> ![Finished obstacle](xcode_obstacle_sks.png)
 
 <!-- -->
 
@@ -90,7 +89,9 @@ initially setup the scene.
 
 Now this hopefully look a lot like this.
 
-![Checking the obstacles](../Tutorial-Images/xcode_add_obstacle_gamescene.png)
+![Checking the obstacles](xcode_add_obstacle_gamescene.png)
+
+NOTE! The carrots/obstackle will need to be scaled to fit the updated screen dimensions. See the image above. Set scale x and y to 2. Then position x 838 and y 580.
 
 # Dynamic obstacle generation
 
@@ -133,7 +134,7 @@ of the obstacles by moving the node.
 > Set the position to `(0, 0)`, _Z-Position_ to `1` and _Name_ to
 > `obstacleLayer`
 >
-> ![Creating the obstacle layer node](../Tutorial-Images/xcode_add_obstacle_layer.png)
+> ![Creating the obstacle layer node](xcode_add_obstacle_layer.png)
 
 <!-- -->
 
@@ -141,7 +142,7 @@ of the obstacles by moving the node.
 >
 > Make sure to set `obstacleLayer` to be the parent of the `obstacle` object!
 >
-> ![obstacle parent and child](../Tutorial-Images/xcode_obstacle_parent.png)
+> ![obstacle parent and child](xcode_obstacle_parent.png)
 
 <!-- -->
 
@@ -151,7 +152,7 @@ of the obstacles by moving the node.
 > on top of each other, an awesome tip that not everyone is aware of is to use
 > the scene hierarchy selector:
 >
-> ![Selecting nodes](../Tutorial-Images/xcode_node_selection_tip.png)
+> ![Selecting nodes](xcode_node_selection_tip.png)
 >
 > You can thank me later :]
 
@@ -198,25 +199,18 @@ You are going to create another conveyor belt solution for the newly added
 ```
 func updateObstacles() {
    /* Update Obstacles */
->
    obstacleLayer.position.x -= scrollSpeed * CGFloat(fixedDelta)
->
    /* Loop through obstacle layer nodes */
    for obstacle in obstacleLayer.children as! [SKReferenceNode] {
->
        /* Get obstacle node position, convert node position to scene space */
        let obstaclePosition = obstacleLayer.convert(obstacle.position, to: self)
->
        /* Check if obstacle has left the scene */
        if obstaclePosition.x <= -26 {
        // 26 is one half the width of an obstacle
->
            /* Remove obstacle node from obstacle layer */
            obstacle.removeFromParent()
        }
->
    }
->
  }
 ```
 
@@ -255,17 +249,17 @@ different height.
 ```
 /* Time to add a new obstacle? */
 if spawnTimer >= 1.5 {
->
+
     /* Create a new obstacle by copying the source obstacle */
     let newObstacle = obstacleSource.copy() as! SKNode
     obstacleLayer.addChild(newObstacle)
->
+
     /* Generate new obstacle position, start just outside screen and with a random y value */
-    let randomPosition =  CGPoint(x: 347, y: CGFloat.random(in: 234...382))
->
+    let randomPosition =  CGPoint(x: 838, y: CGFloat.random(in: 468...764))
+
     /* Convert new node position back to obstacle layer space */
     newObstacle.position = self.convert(randomPosition, to: obstacleLayer)
->
+
     // Reset spawn timer
     spawnTimer = 0
 }
